@@ -1,0 +1,52 @@
+{# le template hérite de base.html.twig = il reprend son contenu #}
+{% extends 'base.html.twig' %}
+
+{#
+{{ parent() }} reprend le contenu du bloc title défini
+dans base.html.twig à l'endroit où on le place
+#}
+{% block title %}{{ parent() }} - Twig{% endblock %}
+
+{# surcharge du bloc body défini dans base.html.twig #}
+{% block body %}
+    {# définit une variable #}
+    {% set test = 'Une variable de test' %}
+
+    {# affichage d'une variable #}
+    <p>{{ test }}</p>
+
+    {# concaténation avec le tilde #}
+    <p>{{ test ~ ' !' }}</p>
+
+    {# structure conditionnelle #}
+    {% if test != '' %}
+        <p>test n'est pas vide</p>
+    {% else %}
+        <p>test est vide</p>
+    {% endif %}
+
+    {% set vrai = true %}
+    {% set faux = false %}
+
+    {# not en toutes lettres : if (!$faux) #}
+    {% if not faux %}
+        <p>faux n'est pas vrai</p>
+    {% endif %}
+
+    {# and et or en toutes lettres : if ($vrai && !$faux) #}
+    {% if vrai and not faux %}
+        <p>vrai est vrai et faux n'est pas vrai</p>
+    {% endif %}
+
+    {% set tableau = ['a', 'b', 'c', 'd'] %}
+
+    {# pour accéder à un élément d'un tableau #}
+    {{ tableau[2] }}<br>
+    {# ou : #}
+    {{ tableau.2 }}<br>
+
+    {# foreach ($tableau as $lettre) #}
+    {% for lettre in tableau %}
+        {{ lettre }}<br>
+    {% endfor %}
+{% endblock %}
