@@ -22,10 +22,17 @@ class TwigController extends AbstractController
      */
     public function index()
     {
+        $demain = new \DateTime('+1day');
+        $apresDemain = $demain->add(new \DateInterval('P1D'));
+
+        // var_dump qui s'affiche dans la barre de debug
+        dump($apresDemain);
+
         return $this->render(
             'twig/index.html.twig',
             [
-
+                'demain' => $demain,
+                'apres_demain' => $apresDemain
             ]
         );
     }

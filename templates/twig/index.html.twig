@@ -49,4 +49,125 @@ dans base.html.twig à l'endroit où on le place
     {% for lettre in tableau %}
         {{ lettre }}<br>
     {% endfor %}
+
+    {# tableau associatif #}
+    {% set hash = {nom: 'Marx', prenom: 'Groucho', profession: 'Explorateur'} %}
+
+    {# foreach ($hash as $key => $value) #}
+    {% for key, value in hash %}
+        {{ key }} : {{ value }}<br>
+    {% endfor %}
+
+    {% set vide = [] %}
+
+    {# on rentre dans le else d'un for si le tableau est vide #}
+    {% for value in vide %}
+        {{ value }}<br>
+    {% else %}
+        <p>Le tableau est vide</p>
+    {% endfor %}
+
+    {#
+    loop est accessible dans toutes les boucles et donne
+    l'information de l'état de la boucle
+    #}
+    {% for value in hash %}
+        Tour de boucle (index 1) : {{ loop.index }}<br>
+        Tour de boucle (index 0) : {{ loop.index0 }}<br>
+
+        {% if loop.first %}
+            1er tour de boucle<br>
+        {% endif %}
+
+        {% if loop.last %}
+            Dernier tour de boucle<br>
+        {% endif %}
+
+        {{ value }}<br>
+    {% endfor %}
+
+    {# for ($i = 0; $i <= 10; $i++) #}
+    {% for i in 0..10 %}
+        {{ i }}<br>
+    {% endfor %}
+
+    {# tests avec is et is not #}
+
+    {# if (isset($test)) #}
+    {% if test is defined %}
+        La variable test existe<br>
+    {% endif %}
+
+    {# if (!empty($test)) #}
+    {% if test is not empty %}
+        La variable test n'est pas vide<br>
+    {% endif %}
+
+    {% set dix = 10 %}
+
+    {# if ($dix % 5 == 0) #}
+    {% if dix is divisible by(5) %}
+        Dix est divisible par 5<br>
+    {% endif %}
+
+    {# even et odd pour pair et impair #}
+    {% if dix is even %}
+        {{ dix }} est pair<br>
+    {% endif %}
+
+    {% if dix is not odd %}
+        {{ dix }} n'est pas impair<br>
+    {% endif %}
+
+    {# if (in_array('a', $tableau)) #}
+    {% if 'a' in tableau %}
+        Tableau contient 'a'<br>
+    {% endif %}
+
+    {# filtres #}
+
+    {# strtoupper($test) #}
+    <p>{{ test|upper }}</p>
+
+    {# valeur par défaut quand la variable est vide (empty) #}
+    <p>{{ var|default('la variable est vide') }}</p>
+
+    {# on peut cumuler les filtres #}
+    <p>{{ var|default('la variable est vide')|upper }}</p>
+
+    {# formatage de date #}
+    <p>{{ '2020-02-06'|date('d/m/Y') }}</p>
+
+    {# var_dump($demain) #}
+    {{ dump(demain) }}
+
+    <p>{{ demain|date('d/m/Y') }}</p>
+    {#
+    équivalent à :
+    appel de la méthode format() sur l'objet Datetime
+    #}
+    <p>{{ demain.format('d/m/Y') }}</p>
+
+    {% set html = '<p>Un paragraphe</p>' %}
+
+    {# par défaut, le HTML est échappé en entités HTML (&lt; et &gt;) #}
+    {{ html }}
+
+    {# pour que le HTML ne soit pas échappé #}
+    {{ html|raw }}
+
+    {#
+    inclusion d'un autre template,
+    chemin à partir de la racine du répertoire templates
+    #}
+    {% include 'twig/inclus.html.twig' %}
+
+    {# inclusion sans passer les variables au fichier inclus #}
+    {% include 'twig/inclus.html.twig' only %}
+
+    {# inclusion en ajoutant une variable pour le fichier inclus #}
+    {% include 'twig/inclus.html.twig' with {foo: 'BAR'} %}
+
+    {# seule la variable foo est passée au fichier inclus #}
+    {% include 'twig/inclus.html.twig' with {foo: 'BAR'} only %}
 {% endblock %}
