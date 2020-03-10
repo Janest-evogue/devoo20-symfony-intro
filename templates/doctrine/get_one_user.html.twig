@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if member is not null %}
+        <h1>Bonjour {{ member.pseudo }}</h1>
+    {% else %}
+        <p>Aucun membre n'a l'id reçu dans l'url</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form>
+        <input type="email" name="email" placeholder="Email">
+        <button type="submit">Chercher</button>
+    </form>
+
+    {# s'il y a une recherche #}
+    {% if member is defined %}
+        {# si l'email existe en bdd #}
+        {% if member is not null %}
+            <p>Le membre est {{ member.pseudo }}</p>
+        {% else %}
+            <p>Aucun membre avec cet email</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

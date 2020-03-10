@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {#
+    lister les membres dans un tableau HTML
+    #}
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Pseudo</td>
+            <td>Email</td>
+            <td>Date de naissance</td>
+        </tr>
+        {% for member in members %}
+            <tr>
+                <th>{{ member.id }}</th>
+                <th>{{ member.pseudo }}</th>
+                <th>{{ member.email }}</th>
+                <th>{{ member.birthdate ? member.birthdate|date('d/m/Y') }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

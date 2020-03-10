@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form>
+        <input type="text" name="search" placeholder="Email ou pseudo">
+        <button type="submit">Chercher</button>
+    </form>
+
+    {% if members is defined %}
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>Pseudo</td>
+                <td>Email</td>
+                <td>Date de naissance</td>
+            </tr>
+            {% for member in members %}
+                <tr>
+                    <th>{{ member.id }}</th>
+                    <th>{{ member.pseudo }}</th>
+                    <th>{{ member.email }}</th>
+                    <th>{{ member.birthdate ? member.birthdate|date('d/m/Y') }}</th>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
